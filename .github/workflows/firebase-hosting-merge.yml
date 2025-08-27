@@ -16,6 +16,6 @@ jobs:
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{
-            secrets.FIREBASE_SERVICE_ACCOUNT_CRYPTO_CURRENCY_DASHBOAR_45BE4 }}
+            secrets.FIREBASE_SERVICE_ACCOUNT_CRYPTO_CURRENCY_dashboard_45BE4 }}
           channelId: live
-          projectId: crypto-currency-dashboar-45be4
+          projectId: crypto-currency-dashboard-45be4
