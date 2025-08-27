@@ -17,6 +17,5 @@ jobs:
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{
-            secrets.FIREBASE_SERVICE_ACCOUNT_CRYPTO_CURRENCY_dashboard_45BE4 }}
-          projectId: crypto-currency-dashboard-45be4
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_CRYTO_CURRENCY_DASHBOARD }}
+          projectId: cryto-currency-dashboard
