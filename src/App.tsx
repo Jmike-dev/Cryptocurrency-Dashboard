@@ -1,5 +1,5 @@
 const url = import.meta.env.VITE_COINGECKO;
-const apiKey = import.meta.env.VITE_APIkEY;
+// const apiKey = import.meta.env.VITE_APIkEY;
 function App() {
     return (
         <>
