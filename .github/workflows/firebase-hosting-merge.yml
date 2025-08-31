@@ -27,6 +27,7 @@ jobs:
       - run: npm ci && npm run build
         env:
           VITE_COINGECKO: ${{ vars.VITE_COINGECKO }}
+          VITE_APIKEY: ${{vars.VITE_APIKEY}}
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
