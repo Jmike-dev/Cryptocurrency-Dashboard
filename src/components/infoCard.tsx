@@ -22,7 +22,7 @@ export const InfoCard = ({
                 <div className="flex h-8 w-8 items-center justify-center rounded-full bg-yellow-400">
                     <Icon className="h-4 w-4 text-gray-800" />
                 </div>
-                <h3 className="text-sm font-medium text-white capitalize">
+                <h3 className="font-xl text-sm text-white capitalize">
                     {title}
                 </h3>
             </div>
@@ -32,7 +32,7 @@ export const InfoCard = ({
 
             {/* Percentage Change */}
             <div
-                className={`text-sm font-medium ${isPositive ? "text-green-400" : "text-red-400"}`}
+                className={`text-md font-medium ${isPositive ? "text-green-400" : "text-red-400"}`}
             >
                 {isPositive ? "+" : ""}
                 {percentageChange}% per year
