@@ -1,4 +1,3 @@
-// src/store/coinsStore.ts
 import { create } from "zustand";
 import { getCoinsList } from "../services/coins.service";
 

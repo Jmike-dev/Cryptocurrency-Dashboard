@@ -5,12 +5,12 @@ import { Coins } from "lucide-react";
 import { useNFTsStore } from "../store/nfts.store";
 
 function Header() {
-    const { coins, fetchCoins } = useCoinsStore();
-    const { allNfts, fetchNFTs } = useNFTsStore();
-    useEffect(() => {
-        fetchCoins();
-        fetchNFTs();
-    }, [fetchCoins]);
+    // const { coins, fetchCoins } = useCoinsStore();
+    // const { allNfts, fetchNFTs } = useNFTsStore();
+    // useEffect(() => {
+    //     fetchCoins();
+    //     fetchNFTs();
+    // }, [fetchCoins]);
 
     return (
         <>
@@ -18,12 +18,14 @@ function Header() {
                 <InfoCard
                     icon={Coins}
                     title="total coins"
-                    value={`${coins.length}`}
+                    // value={`${coins.length}`}
+                    value="2000"
                 />
                 <InfoCard
                     icon={Coins}
                     title="number of NFTS"
-                    value={`${allNfts.length}`}
+                    // value={`${allNfts.length}`}
+                    value="100"
                 />
             </section>
         </>

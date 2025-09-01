@@ -1,12 +1,22 @@
 import CoinsList from "./components/CoinsList";
+import Header from "./components/Header";
+import NftsList from "./components/NftsList";
 
-const url = import.meta.env.VITE_COINGECKO;
-// const apiKey = import.meta.env.VITE_APIkEY;
 function App() {
     return (
-        <>
-            <CoinsList />
-        </>
+        <section className="cursor-default space-y-8 p-8">
+            <Header />
+            {/* listing tables and column */}
+            <section className="flex gap-4">
+                <div className="w-1/5">
+                    <CoinsList />
+                </div>
+                <div className="w-full">
+                    <NftsList />
+                </div>
+            </section>
+            <NftsList />
+        </section>
     );
 }
 
