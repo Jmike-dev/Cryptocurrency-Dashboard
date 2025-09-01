@@ -11,7 +11,7 @@ function App() {
             {/* Layout wrapper */}
             <section className="flex gap-4">
                 {/* Sidebar for Coins */}
-                <div className="w-1/5">
+                <div className="h-screen w-1/5">
                     <CoinsList />
                 </div>
 
@@ -19,10 +19,10 @@ function App() {
                 <div className="w-full space-y-8">
                     {/* Two tables side by side */}
                     <div className="flex flex-col gap-4">
-                        <div className="w-1/2">
-                            {/* <ExchangeRatesList /> */}
+                        <div className="w-full">
+                            <ExchangeRatesList />
                         </div>
-                        <div className="w-1/2">
+                        <div className="w-full">
                             <NftsList />
                         </div>
                     </div>
