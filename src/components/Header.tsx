@@ -23,7 +23,7 @@ function Header() {
                 />
                 <InfoCard
                     icon={Coins}
-                    title="number of NFTS"
+                    title="number of NFTs"
                     value={`${allNfts.length}`}
                     // value="100"
                 />
