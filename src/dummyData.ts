@@ -28,3 +28,40 @@ export const dummyAllNfts = [
         symbol: "ALPHASHARKS",
     },
 ];
+export const dummyCoins = [
+    {
+        id: "1",
+        symbol: "dummy symbol",
+        name: "bitcon",
+    },
+    {
+        id: "2",
+        symbol: "dummy symbol",
+        name: "bitcon",
+    },
+    {
+        id: "3",
+        symbol: "dummy symbol",
+        name: "bitcon",
+    },
+    {
+        id: "4",
+        symbol: "dummy symbol",
+        name: "bitcon",
+    },
+    {
+        id: "5",
+        symbol: "dummy symbol",
+        name: "bitcon",
+    },
+    {
+        id: "6",
+        symbol: "dummy symbol",
+        name: "bitcon",
+    },
+    {
+        id: "7",
+        symbol: "dummy symbol",
+        name: "bitcon",
+    },
+];

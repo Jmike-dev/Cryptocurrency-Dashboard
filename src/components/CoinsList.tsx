@@ -11,43 +11,7 @@ function CoinsList() {
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p className="text-red-500">Error: {error}</p>;
-    const dummyCoins = [
-        {
-            id: "1",
-            symbol: "dummy symbol",
-            name: "bitcon",
-        },
-        {
-            id: "2",
-            symbol: "dummy symbol",
-            name: "bitcon",
-        },
-        {
-            id: "3",
-            symbol: "dummy symbol",
-            name: "bitcon",
-        },
-        {
-            id: "4",
-            symbol: "dummy symbol",
-            name: "bitcon",
-        },
-        {
-            id: "5",
-            symbol: "dummy symbol",
-            name: "bitcon",
-        },
-        {
-            id: "6",
-            symbol: "dummy symbol",
-            name: "bitcon",
-        },
-        {
-            id: "7",
-            symbol: "dummy symbol",
-            name: "bitcon",
-        },
-    ];
+
     return (
         <section className="min-h-screen w-full bg-gray-900 p-6">
             <h1 className="mb-6 text-2xl font-bold text-white">Portfolio</h1>
