@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useNFTsStore } from "../store/nfts.store";
 import { ChevronDown } from "lucide-react";
+// import { dummyAllNfts } from "../dummyData";
 
 function NftsList() {
     const { allNfts, loading, fetchNFTs } = useNFTsStore();
@@ -11,7 +12,7 @@ function NftsList() {
 
     if (loading) {
         return (
-            <section className="w-full rounded-lg bg-[#111] p-4 text-white">
+            <section className="w-full rounded-lg bg-gray-900 p-4 text-white">
                 <h1 className="p-6 text-3xl">NFTs</h1>
                 <div className="max-h-96 overflow-y-auto">
                     <table className="w-full text-lg">
@@ -68,7 +69,7 @@ function NftsList() {
     }
 
     return (
-        <section className="w-full rounded-lg bg-[#111] p-4 text-white">
+        <section className="w-full rounded-lg bg-gray-900 p-4 text-white">
             <h1 className="p-6 text-3xl">NFTS </h1>
             <div className="max-h-96 overflow-y-auto">
                 <table className="w-full text-lg">
