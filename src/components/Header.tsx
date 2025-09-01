@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useCoinsStore } from "../store/coins.store";
 import { InfoCard } from "./infoCard";
 import { Coins } from "lucide-react";

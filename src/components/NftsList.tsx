@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useNFTsStore } from "../store/nfts.store";
 import { ChevronDown } from "lucide-react";
 
