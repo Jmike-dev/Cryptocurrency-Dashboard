@@ -12,7 +12,7 @@ function NftsList() {
     if (loading) {
         return (
             <section className="w-full rounded-lg bg-[#111] p-4 text-white">
-                <h1 className="p-6 text-3xl">NFTS</h1>
+                <h1 className="p-6 text-3xl">NFTs</h1>
                 <div className="max-h-96 overflow-y-auto">
                     <table className="w-full text-lg">
                         <thead>

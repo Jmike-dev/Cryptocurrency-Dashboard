@@ -42,7 +42,9 @@ function CoinsList() {
 
     return (
         <section className="min-h-screen w-full bg-gray-900 p-6">
-            <h1 className="mb-6 text-2xl font-bold text-white">Coin listing</h1>
+            <h1 className="mb-6 text-2xl font-bold text-white">
+                Coins listing
+            </h1>
             <div className="max-h-screen overflow-y-auto pr-2">
                 <ul className="space-y-4">
                     {coins.map((coin) => (
