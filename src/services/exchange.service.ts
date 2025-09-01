@@ -15,7 +15,9 @@ export async function getExchangeRates(): Promise<
     { success: true; data: ExchangeRate[] } | { success: false; error: any }
 > {
     try {
-        const response = await axios.get(`${url}exchange_rates${apiKey}`);
+        const response = await axios.get(
+            `${url}exchange_rates?x_cg_demo_api_key=${apiKey}`,
+        );
 
         const rates = Object.entries(response.data.rates).map(
             ([key, value]: any) => ({

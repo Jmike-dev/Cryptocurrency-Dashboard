@@ -5,7 +5,9 @@ const apiKey = import.meta.env.VITE_APIkEY;
 
 export async function getCoinsList() {
     try {
-        const response = await axios.get(`${url}coins/list${apiKey}`);
+        const response = await axios.get(
+            `${url}coins/list?x_cg_demo_api_key=${apiKey}`,
+        );
         return response.data;
     } catch (error: any) {
         if (axios.isAxiosError(error)) {
