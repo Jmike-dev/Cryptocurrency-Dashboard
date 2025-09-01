@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const url = import.meta.env.VITE_COINGECKO;
-const apiKey = import.meta.env.VITE_APIkEY;
+const apiKey = import.meta.env.VITE_APIKEY;
 
 export async function getNFTS() {
     try {
