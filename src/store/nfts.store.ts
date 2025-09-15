@@ -1,43 +1,52 @@
+// src/store/nfts.store.ts
 import { create } from "zustand";
-import { getNFTS } from "../services/nfts.service";
+import { getNFTs } from "../services/nfts.service";
+import type { NFT } from "../services/nfts.service"; // type-only import
 
-interface NFTs {
-    id: string;
-    contract_address: string;
-    name: string;
-    asset_platform_id: string;
-    symbol: string;
-}
 interface NFTsState {
-    allNfts: NFTs[];
-    loading: boolean;
-    error: string | null;
-    fetchNFTs: () => Promise<void>;
+  allNfts: NFT[];
+  loading: boolean;
+  error: string | null;
+  fetchNFTs: () => Promise<void>;
 }
+
 export const useNFTsStore = create<NFTsState>((set) => ({
-    allNfts: [],
-    loading: false,
-    error: null,
+  allNfts: [],
+  loading: false,
+  error: null,
 
-    fetchNFTs: async () => {
-        set({ loading: true, error: null });
-        try {
-            const data = await getNFTS();
+  fetchNFTs: async () => {
+    set({ loading: true, error: null });
 
-            if ("success" in data && !data.success) {
-                set({
-                    allNfts: [],
-                    error:
-                        data.error?.status?.error_message ||
-                        "Failed to fetch allNfts",
-                });
-            } else {
-                set({ allNfts: data, error: null });
-            }
-        } catch (err: any) {
-            set({ allNfts: [], error: err.message || "Unexpected error" });
-        } finally {
-            set({ loading: false });
+    try {
+      const res = await getNFTs();
+
+      if (!res || !res.success) {
+        const errMsg = res?.error || "Failed to fetch NFTs";
+        console.warn("NFT fetch warning:", errMsg);
+        set({ allNfts: [], error: errMsg });
+        return;
+      }
+
+      // Deduplicate by token_id
+      const uniqueNFTsMap = new Map<string, NFT>();
+      res.data?.forEach((nft: NFT) => {
+        if (nft?.token_id && !uniqueNFTsMap.has(nft.token_id)) {
+          uniqueNFTsMap.set(nft.token_id, nft);
         }
-    },
+      });
+
+      // Convert map to array and sort by token_id
+      const uniqueNFTs = Array.from(uniqueNFTsMap.values()).sort(
+        (a, b) => Number(a.token_id) - Number(b.token_id)
+      );
+
+      set({ allNfts: uniqueNFTs, error: null });
+    } catch (err: any) {
+      console.error("fetchNFTs caught error:", err);
+      //set({ allNfts: [], error: err?.message || "Unexpected error occurred" });
+    } finally {
+      set({ loading: false });
+    }
+  },
 }));

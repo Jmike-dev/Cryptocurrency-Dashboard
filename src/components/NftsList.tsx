@@ -1,131 +1,120 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNFTsStore } from "../store/nfts.store";
-import { ChevronDown } from "lucide-react";
-// import { dummyAllNfts } from "../dummyData";
+import type { NFT } from "../services/nfts.service";
+
+// Random placeholder images
+const placeholderImages = [
+  "https://picsum.photos/400/400?random=1",
+  "https://picsum.photos/400/400?random=2",
+  "https://picsum.photos/400/400?random=3",
+  "https://picsum.photos/400/400?random=4",
+  "https://picsum.photos/400/400?random=5",
+];
 
 function NftsList() {
-    const { allNfts, loading, fetchNFTs } = useNFTsStore();
+  const { allNfts, loading, fetchNFTs, error } = useNFTsStore();
+  const [imageLoading, setImageLoading] = useState<Record<string, boolean>>({});
 
-    useEffect(() => {
-        fetchNFTs();
-    }, [fetchNFTs]);
+  useEffect(() => {
+    fetchNFTs();
+  }, [fetchNFTs]);
 
-    if (loading) {
-        return (
-            <section className="w-full rounded-lg bg-gray-900 p-4 text-white">
-                <h1 className="p-6 text-3xl">NFTs</h1>
-                <div className="max-h-96 overflow-y-auto">
-                    <table className="w-full text-lg">
-                        <thead>
-                            <tr className="border-b border-gray-700 text-gray-400">
-                                <th className="py-3 text-left">NFT name</th>
-                                <th className="text-left">Network</th>
-                                <th className="text-left">Contract</th>
-                                <th className="text-left">Symbol</th>
-                                <th className="text-left">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {Array.from({ length: 6 }).map((_, i) => (
-                                <tr
-                                    key={i}
-                                    className="animate-pulse border-b border-gray-800"
-                                >
-                                    {/* NFT name skeleton */}
-                                    <td className="flex items-center gap-2 py-3">
-                                        <div className="h-8 w-8 rounded-full bg-gray-700" />
-                                        <div className="space-y-2">
-                                            <div className="h-4 w-28 rounded bg-gray-700" />
-                                            <div className="h-3 w-20 rounded bg-gray-700" />
-                                        </div>
-                                    </td>
+  useEffect(() => {
+    const loadingStates: Record<string, boolean> = {};
+    allNfts.forEach((nft) => {
+      loadingStates[nft.token_id] = true;
+    });
+    setImageLoading(loadingStates);
+  }, [allNfts]);
 
-                                    {/* Network skeleton */}
-                                    <td>
-                                        <div className="h-4 w-16 rounded bg-gray-700" />
-                                    </td>
+  const handleImageLoad = (tokenId: string) => {
+    setImageLoading((prev) => ({ ...prev, [tokenId]: false }));
+  };
 
-                                    {/* Contract skeleton */}
-                                    <td>
-                                        <div className="h-4 w-40 rounded bg-gray-700" />
-                                    </td>
+  const renderSkeleton = () => (
+    <div className="bg-gray-800 rounded-2xl animate-pulse h-64 flex flex-col shadow-lg overflow-hidden">
+      <div className="h-48 w-full bg-gray-700 mb-4 rounded-t-2xl" />
+      <div className="px-4 flex-1 space-y-2">
+        <div className="h-4 bg-gray-700 rounded w-3/4" />
+        <div className="h-3 bg-gray-700 rounded w-1/2" />
+        <div className="h-3 bg-gray-700 rounded w-full" />
+      </div>
+    </div>
+  );
 
-                                    {/* Symbol skeleton */}
-                                    <td>
-                                        <div className="h-4 w-10 rounded bg-gray-700" />
-                                    </td>
-
-                                    {/* Action skeleton */}
-                                    <td>
-                                        <div className="h-6 w-6 rounded-full bg-gray-700" />
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-        );
-    }
-
+  if (loading)
     return (
-        <section className="w-full rounded-lg bg-gray-900 p-4 text-white">
-            <h1 className="p-6 text-3xl">NFTS </h1>
-            <div className="max-h-96 overflow-y-auto">
-                <table className="w-full text-lg">
-                    <thead>
-                        <tr className="border-b border-gray-700 text-gray-400">
-                            <th className="py-3 text-left">NFT name</th>
-                            <th className="text-left">Network</th>
-                            <th className="text-left">Contract</th>
-                            <th className="text-left">Symbol</th>
-                            <th className="text-left">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {allNfts.map((nft) => (
-                            <tr
-                                key={nft.id}
-                                className="border-b border-gray-800 hover:bg-gray-900"
-                            >
-                                <td className="flex items-center gap-2 py-3">
-                                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-r from-purple-500 to-blue-500">
-                                        <span className="text-xs font-bold">
-                                            {nft.symbol[0]}
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <p className="font-medium">
-                                            {nft.name}
-                                        </p>
-                                        <p className="text-xs text-gray-400">
-                                            ID #{nft.id}
-                                        </p>
-                                    </div>
-                                </td>
-
-                                <td className="capitalize">
-                                    {nft.asset_platform_id}
-                                </td>
-
-                                <td className="max-w-[200px] truncate text-gray-400">
-                                    {nft.contract_address}
-                                </td>
-
-                                <td>{nft.symbol}</td>
-
-                                <td>
-                                    <button className="rounded-full p-2 hover:bg-gray-700">
-                                        <ChevronDown size={16} />
-                                    </button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-        </section>
+      <section className="max-w-7xl mx-auto p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {Array.from({ length: 8 }).map((_, i) => (
+          <div key={i}>{renderSkeleton()}</div>
+        ))}
+      </section>
     );
+
+  if (error)
+    return <p className="text-center text-red-400 text-lg mt-8">{error}</p>;
+
+  if (!allNfts.length)
+    return <p className="text-center text-gray-400 text-lg mt-8">No NFTs found.</p>;
+
+  return (
+    <section className="max-w-7xl mx-auto p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      {allNfts.map((nft, i) => {
+        const imgSrc =
+          nft.metadata
+            ? (() => {
+                try {
+                  const meta = JSON.parse(nft.metadata);
+                  return meta.image || placeholderImages[i % placeholderImages.length];
+                } catch {
+                  return placeholderImages[i % placeholderImages.length];
+                }
+              })()
+            : placeholderImages[i % placeholderImages.length];
+
+        return (
+          <div
+            key={nft.token_id}
+            className="bg-gray-900 rounded-2xl shadow-2xl overflow-hidden hover:scale-105 transform transition duration-300 ease-in-out hover:shadow-3xl border border-gray-700"
+          >
+            <div className="h-48 w-full relative bg-gray-800 flex items-center justify-center overflow-hidden">
+              <img
+                src={imgSrc}
+                alt={nft.name}
+                onLoad={() => handleImageLoad(nft.token_id)}
+                className={`h-full w-full object-cover transition-opacity duration-500 ${
+                  imageLoading[nft.token_id] ? "opacity-0" : "opacity-100"
+                }`}
+              />
+              {imageLoading[nft.token_id] && (
+                <div className="absolute inset-0 bg-gray-700 animate-pulse rounded-t-2xl" />
+              )}
+            </div>
+
+            <div className="p-4 flex flex-col justify-between h-44">
+              <div>
+                <h3 className="font-bold text-lg mb-1 truncate">{nft.name}</h3>
+                <p className="text-gray-400 text-sm mb-1">Token ID: {nft.token_id}</p>
+                <p className="text-gray-400 text-xs break-all truncate">
+                  Owner: {nft.owner_of}
+                </p>
+              </div>
+              {nft.token_uri && (
+                <a
+                  href={nft.token_uri}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-2 text-center bg-purple-600 hover:bg-purple-500 text-white text-sm font-semibold py-1 px-3 rounded-lg transition-all duration-200 truncate"
+                >
+                  View Token URI
+                </a>
+              )}
+            </div>
+          </div>
+        );
+      })}
+    </section>
+  );
 }
 
 export default NftsList;
